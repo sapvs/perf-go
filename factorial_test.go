@@ -34,8 +34,9 @@ func ExampleFactorialSerial() {
 }
 
 func ExampleFactorialRecursive() {
-	factorial := perf.FactorialRecursive(5)
-	fmt.Printf("Factorial of 5 is %d", factorial)
+	number := 5
+	factorial := perf.FactorialRecursive(number)
+	fmt.Printf("Factorial of %d is %d", number, factorial)
 	//Output: Factorial of 5 is 120
 }
 
@@ -52,7 +53,7 @@ func TestFactorial(t *testing.T) {
 	}
 }
 
-//Benchmarks
+// Benchmarks
 var out int
 var inputArg int = 20
 
@@ -76,4 +77,17 @@ func BenchmarkFactorialParallel(b *testing.B) {
 			})
 		})
 	}
+}
+
+var fact int
+
+func FuzzFactorial(f *testing.F) {
+	for _, tc := range []int{1, 2, 3, 4, 5} {
+		f.Add(tc)
+	}
+
+	f.Fuzz(func(t *testing.T, a int) {
+		fact = perf.FactorialSerial(a)
+	})
+
 }
