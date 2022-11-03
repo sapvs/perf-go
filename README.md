@@ -8,11 +8,13 @@ make
 
 ## Results (On my PC ;) )
 
+### Counter problem using [sync.atomic](https://pkg.go.dev/sync/atomic) versus [sync.mutex](https://pkg.go.dev/sync#Mutex)
 |Counter|Total|ns per op|
 |-|-|-|
 |BenchmarkCounterAtomic-4|69815256|18.02 ns/op|
 |BenchmarkCounterMutex-4|24769442|46.93 ns/op|
 
+### Factorial recursive vs serial
 |Factorial|Total|ns per op|
 |-|-|-|
 |BenchmarkFactorialSerial/FactorialSerial-20-4|113081472|10.46 ns/op|
@@ -20,12 +22,14 @@ make
 |BenchmarkFactorialParallel/FactorialSerial-20-4|276191018|4.326 ns/op|
 |BenchmarkFactorialParallel/FactorialRecursive-20-4|72123966|15.11 ns/op|
 
+### Fibonacci Classic vs DP
 |Fibbonacci|Total|ns per op|
 |-|-|-|
 |BenchmarkFibonnaciSerial/FibonacciSumClassic-20-4|31941|37669 ns/op|
 |BenchmarkFibonnaciSerial/FibonacciSumDP-20-4|59457067|18.42 ns/op|
 |BenchmarkFibbonacciParallel-4|75055|15622 ns/op|
 
+### Fizzbuzz three approaches
 |FizzBuzz|Total|ns per op|
 |-|-|-|
 |BenchmarkFizzBuzzSer/v1-1-4|290979|3659 ns/op|
@@ -35,6 +39,7 @@ make
 |BenchmarkFizzBuzzPar/v2-1-4|480120|2218 ns/op|
 |BenchmarkFizzBuzzPar/v3-1-4|494432|2205 ns/op|
 
+### Check if number is prime, Three ways worst to best
 |Is Prime|Total|ns per op|
 |-|-|-|
 |BenchmarkIsPrimeSerial/PrimeV1-1-4|51702789|19.60 ns/op|
@@ -43,6 +48,7 @@ make
 |BenchmarkIsPrimeParallel-4|49888394|21.62 ns/op|
 
 
+### JSON vs XML
 |JSON vs XML|Total|ns per op|mem per op|alloc per op|
 |-|-|-|-|-|
 |BenchmarkToJSON-4|332880|3214 ns/op|179 B/op|3 allocs/op|
