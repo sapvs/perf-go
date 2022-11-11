@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
+
+	"google.golang.org/protobuf/proto"
 )
 
 type User struct {
@@ -50,4 +52,23 @@ func StructToXML(user *User) (string, error) {
 		return "", err
 	}
 	return string(bytes), nil
+}
+
+func ProtoToStruct(by []byte) (*UserP, error) {
+	var user UserP
+
+	err := proto.Unmarshal(by, &user)
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+func StructToProto(user *UserP) ([]byte, error) {
+	by, err := proto.Marshal(user)
+	if err != nil {
+		return nil, err
+	}
+	return by, nil
 }

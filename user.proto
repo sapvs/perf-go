@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package perf;
+
+option go_package = "github.com/s3vt/perf";
+
+message UserP {
+    uint64 ID = 1 ;
+    string Name = 2 ;
+}   

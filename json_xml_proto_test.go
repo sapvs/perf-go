@@ -5,6 +5,12 @@ import (
 	"testing"
 )
 
+var userBytes []byte
+
+func init() {
+	userBytes, _ = StructToProto(&UserP{ID: 1, Name: "SomeName"})
+}
+
 func TestJSONToStruct(t *testing.T) {
 	tests := []struct {
 		name       string
@@ -97,27 +103,9 @@ func TestStructToXML(t *testing.T) {
 	}
 }
 
-func BenchmarkToJSON(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		_, err := StructToJSON(&User{ID: 1, Name: "BenchName"})
-		if err != nil {
-			b.Fail()
-		}
-	}
-}
-
 func BenchmarkToXML(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_, err := StructToXML(&User{ID: 1, Name: "BenchName"})
-		if err != nil {
-			b.Fail()
-		}
-	}
-}
-
-func BenchmarkFromJSON(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		_, err := JSONToStruct(`{"userid":1,"username":"SoemName"}`)
 		if err != nil {
 			b.Fail()
 		}
@@ -133,15 +121,22 @@ func BenchmarkFromXML(b *testing.B) {
 	}
 }
 
-func BenchmarkParToXML(b *testing.B) {
-	b.RunParallel(func(p *testing.PB) {
-		for p.Next() {
-			_, err := StructToXML(&User{ID: 1, Name: "BenchName"})
-			if err != nil {
-				b.Fail()
-			}
+func BenchmarkFromJSON(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_, err := JSONToStruct(`{"userid":1,"username":"SoemName"}`)
+		if err != nil {
+			b.Fail()
 		}
-	})
+	}
+}
+
+func BenchmarkToJSON(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_, err := StructToJSON(&User{ID: 1, Name: "BenchName"})
+		if err != nil {
+			b.Fail()
+		}
+	}
 }
 
 func BenchmarkParToJSON(b *testing.B) {
@@ -166,10 +161,91 @@ func BenchmarkParFromJSON(b *testing.B) {
 	})
 }
 
+func BenchmarkParToXML(b *testing.B) {
+	b.RunParallel(func(p *testing.PB) {
+		for p.Next() {
+			_, err := StructToXML(&User{ID: 1, Name: "BenchName"})
+			if err != nil {
+				b.Fail()
+			}
+		}
+	})
+}
+
 func BenchmarkParFromXML(b *testing.B) {
 	b.RunParallel(func(p *testing.PB) {
 		for p.Next() {
 			_, err := XMLToStruct("<User><ID>1</ID><Name>Some Name</Name></User>")
+			if err != nil {
+				b.Fail()
+			}
+		}
+	})
+}
+
+func TestStructToProtoToStruct(t *testing.T) {
+	tests := []struct {
+		name    string
+		user    UserP
+		wantErr bool
+	}{
+		{name: "1", user: UserP{ID: 1, Name: "SomeName"}, wantErr: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+
+			// First conversion
+			b, err := StructToProto(&tt.user)
+			if err != nil {
+				t.Errorf("StructToProto() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			// convertback
+			up, err := ProtoToStruct(b)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("StructToProto() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if up.ID != tt.user.ID || up.Name != tt.user.Name {
+				t.Errorf("TestStructToProtoToStruct() = %v, want %v", up, &tt.user)
+			}
+		})
+	}
+}
+
+func BenchmarkToProto(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_, err := StructToProto(&UserP{ID: 1, Name: "BenchName"})
+		if err != nil {
+			b.Fail()
+		}
+	}
+}
+
+func BenchmarkFromProto(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_, err := ProtoToStruct(userBytes)
+		if err != nil {
+			b.Fail()
+		}
+	}
+}
+
+func BenchmarkParToProto(b *testing.B) {
+	b.RunParallel(func(p *testing.PB) {
+		for p.Next() {
+			_, err := StructToProto(&UserP{ID: 1, Name: "BenchName"})
+			if err != nil {
+				b.Fail()
+			}
+		}
+	})
+}
+
+func BenchmarkParFromProto(b *testing.B) {
+	b.RunParallel(func(p *testing.PB) {
+		for p.Next() {
+			_, err := ProtoToStruct(userBytes)
 			if err != nil {
 				b.Fail()
 			}

@@ -48,7 +48,7 @@ make
 |BenchmarkIsPrimeParallel-4|49888394|21.62|
 
 
-### JSON vs XML
+### JSON vs XML Vs ProtoBuf
 |JSON vs XML|Total|ns/op|mem/op|alloc/op|
 |-|-:|-:|-:|-:|
 |BenchmarkToJSON-4|332880|3214|179|3|
@@ -59,3 +59,7 @@ make
 |BenchmarkParToJSON-4|716979|1718|179|3|
 |BenchmarkParFromJSON-4|336836|3518|312|7|
 |BenchmarkParFromXML-4|74744|15033|1608|34|
+|BenchmarkToProto-4|6285468|175.3|80|2|
+|BenchmarkFromProto-4|5491707|211.5|72|2|
+|BenchmarkParToProto-4|10795147|100.6|80|2|
+|BenchmarkParFromProto-4|9810102|114.5|72|2|
