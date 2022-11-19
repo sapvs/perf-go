@@ -14,6 +14,13 @@ make
 |BenchmarkCounterAtomic-4|69815256|18.02|
 |BenchmarkCounterMutex-4|24769442|46.93|
 
+### String reverse using strings.Builder, runes and byte array
+|Reverse|Total|ns/op|
+|-|-:|-:|
+|BenchmarkStringReverse/RuneArr-4|133401|7843||4352 |2|
+|BenchmarkStringReverse/StringBuil-4|781814|1529||896 |1|
+|BenchmarkStringReverse/ByteArr-4|1307703|917||1792 |2|
+
 ### Factorial recursive vs serial
 |Factorial|Total|ns/op|
 |-|-:|-:|

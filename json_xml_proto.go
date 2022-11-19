@@ -13,9 +13,7 @@ type User struct {
 	Name string `json:"username" xml="username"`
 }
 
-func (u User) String() string {
-	return fmt.Sprintf("ID=%d Name=%s", u.ID, u.Name)
-}
+func (u *User) String() string { return fmt.Sprintf("ID=%d Name=%s", u.ID, u.Name) }
 
 func JSONToStruct(userString string) (*User, error) {
 	var user = &User{}
