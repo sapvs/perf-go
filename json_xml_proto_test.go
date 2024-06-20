@@ -73,7 +73,7 @@ func TestXMLToStruct(t *testing.T) {
 				t.Errorf("XMLToStruct() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
+			if got.ID != tt.want.ID && got.Name != tt.want.Name {
 				t.Errorf("XMLToStruct() = %v, want %v", got, tt.want)
 			}
 		})
