@@ -186,16 +186,16 @@ func BenchmarkParFromXML(b *testing.B) {
 func TestStructToProtoToStruct(t *testing.T) {
 	tests := []struct {
 		name    string
-		user    UserP
+		user    *UserP
 		wantErr bool
 	}{
-		{name: "1", user: UserP{ID: 1, Name: "SomeName"}, wantErr: false},
+		{name: "1", user: &UserP{ID: 1, Name: "SomeName"}, wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 
 			// First conversion
-			b, err := StructToProto(&tt.user)
+			b, err := StructToProto(tt.user)
 			if err != nil {
 				t.Errorf("StructToProto() error = %v, wantErr %v", err, tt.wantErr)
 				return
