@@ -52,7 +52,7 @@ var output int
 func BenchmarkFibonnaciSerial(b *testing.B) {
 	for _, fn := range testfun {
 		b.Run(fmt.Sprintf("%s-%d", fn.name, inp), func(b *testing.B) {
-			for i := 0; i < b.N; i++ {
+			for b.Loop() {
 				output = fn.f(inp)
 			}
 		})

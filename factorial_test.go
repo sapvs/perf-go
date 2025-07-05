@@ -60,7 +60,7 @@ var inputArg int = 20
 func BenchmarkFactorialSerial(b *testing.B) {
 	for _, fun := range factorialfuncs {
 		b.Run(fmt.Sprintf("%s-%d", fun.name, inputArg), func(b *testing.B) {
-			for i := 0; i < b.N; i++ {
+			for b.Loop() {
 				out = fun.funx(inputArg)
 			}
 		})

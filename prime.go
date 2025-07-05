@@ -5,11 +5,12 @@ import (
 )
 
 // IsPrimeV1 worst
-func IsPrimeV1(num int) bool {
+func IsPrimeV1(num uint64) bool {
 	if num == 1 {
 		return false
 	}
-	for i := 2; i < num; i++ {
+	var i uint64
+	for i = 2; i < num; i++ {
 		if num%i == 0 {
 			return false
 		}
@@ -18,11 +19,12 @@ func IsPrimeV1(num int) bool {
 }
 
 // IsPrimeV2 better
-func IsPrimeV2(num int) bool {
+func IsPrimeV2(num uint64) bool {
 	if num == 1 {
 		return false
 	}
-	for i := 2; i <= int(math.Floor(math.Sqrt(float64(num)))); i++ {
+	var i uint64
+	for i = 2; i <= uint64(math.Floor(math.Sqrt(float64(num)))); i++ {
 		if num%i == 0 {
 			return false
 		}
@@ -31,7 +33,7 @@ func IsPrimeV2(num int) bool {
 }
 
 // IsPrimeV3 best
-func IsPrimeV3(num int) bool {
+func IsPrimeV3(num uint64) bool {
 	if num == 1 {
 		return false
 	}
@@ -43,7 +45,8 @@ func IsPrimeV3(num int) bool {
 		return false
 	}
 
-	for i := 3; i <= int(math.Floor(math.Sqrt(float64(num)))); i += 2 {
+	var i uint64
+	for i = 3; i <= uint64(math.Floor(math.Sqrt(float64(num)))); i += 2 {
 		if num%i == 0 {
 			return false
 		}

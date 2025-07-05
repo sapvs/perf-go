@@ -104,7 +104,7 @@ func TestStructToXML(t *testing.T) {
 }
 
 func BenchmarkToXML(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_, err := StructToXML(&User{ID: 1, Name: "BenchName"})
 		if err != nil {
 			b.Fail()
@@ -113,7 +113,7 @@ func BenchmarkToXML(b *testing.B) {
 }
 
 func BenchmarkFromXML(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_, err := XMLToStruct("<user><ID>1</ID><Name>Some Name</Name></user>")
 		if err != nil {
 			b.Fail()
@@ -122,7 +122,7 @@ func BenchmarkFromXML(b *testing.B) {
 }
 
 func BenchmarkFromJSON(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_, err := JSONToStruct(`{"userid":1,"username":"SoemName"}`)
 		if err != nil {
 			b.Fail()
@@ -131,7 +131,7 @@ func BenchmarkFromJSON(b *testing.B) {
 }
 
 func BenchmarkToJSON(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_, err := StructToJSON(&User{ID: 1, Name: "BenchName"})
 		if err != nil {
 			b.Fail()
@@ -214,7 +214,7 @@ func TestStructToProtoToStruct(t *testing.T) {
 }
 
 func BenchmarkToProto(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_, err := StructToProto(&UserP{ID: 1, Name: "BenchName"})
 		if err != nil {
 			b.Fail()
@@ -223,7 +223,7 @@ func BenchmarkToProto(b *testing.B) {
 }
 
 func BenchmarkFromProto(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_, err := ProtoToStruct(userBytes)
 		if err != nil {
 			b.Fail()
