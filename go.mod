@@ -1,5 +1,5 @@
 module github.com/vsapan/perf-go
 
-go 1.19
+go 1.24.1
 
 require google.golang.org/protobuf v1.34.2

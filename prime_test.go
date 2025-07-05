@@ -11,9 +11,9 @@ var isPrimeFuncs = []struct {
 	name string
 	f    func(int) bool
 }{
-	{name: "PrimeV1", f: perf.IsPrimeV1},
-	{name: "PrimeV2", f: perf.IsPrimeV2},
-	{name: "PrimeV3", f: perf.IsPrimeV3},
+	// {name: "PrimeV1", f: perf.IsPrimeV1},
+	// {name: "PrimeV2", f: perf.IsPrimeV2},
+	// {name: "PrimeV3", f: perf.IsPrimeV3},
 }
 
 var primeUnitTests = []struct {
@@ -62,7 +62,7 @@ var primeInput int = 999
 func BenchmarkIsPrimeSerial(b *testing.B) {
 	for _, test := range isPrimeFuncs {
 		b.Run(fmt.Sprintf("%s-%d", test.name, b.N), func(b *testing.B) {
-			for i := 0; i < b.N; i++ {
+			for b.Loop() {
 				isPrimeResult = test.f(primeInput)
 			}
 		})

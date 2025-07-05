@@ -24,7 +24,7 @@ const COUNT = 50
 func BenchmarkFizzBuzzSer(b *testing.B) {
 	for _, ffn := range fizzBuzzFuncs {
 		b.Run(fmt.Sprintf("%s-%d", ffn.name, b.N), func(b *testing.B) {
-			for i := 0; i < b.N; i++ {
+			for b.Loop() {
 				result = ffn.f(COUNT)
 			}
 		})
