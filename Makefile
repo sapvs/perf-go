@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := all
 gen: 
-	protoc -I=. --go_out=. --go_opt=paths=source_relative ./user.proto
+	docker run --rm -v ${PWD}:/proto protoc:0.1 -I=/proto --go_out=/proto /proto/proto/user.proto
 all: gen
 	# Runs ALL benchmark
 	go test -benchmem -coverprofile=coverage  -bench . -race
