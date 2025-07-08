@@ -3,12 +3,14 @@ package perf
 import (
 	"reflect"
 	"testing"
+
+	"github.com/vsapan/perf-go/gen"
 )
 
 var userBytes []byte
 
 func init() {
-	userBytes, _ = StructToProto(&UserP{ID: 1, Name: "SomeName"})
+	userBytes, _ = StructToProto(&gen.UserP{ID: 1, Name: "SomeName"})
 }
 
 func TestJSONToStruct(t *testing.T) {
@@ -186,10 +188,10 @@ func BenchmarkParFromXML(b *testing.B) {
 func TestStructToProtoToStruct(t *testing.T) {
 	tests := []struct {
 		name    string
-		user    *UserP
+		user    *gen.UserP
 		wantErr bool
 	}{
-		{name: "1", user: &UserP{ID: 1, Name: "SomeName"}, wantErr: false},
+		{name: "1", user: &gen.UserP{ID: 1, Name: "SomeName"}, wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -215,7 +217,7 @@ func TestStructToProtoToStruct(t *testing.T) {
 
 func BenchmarkToProto(b *testing.B) {
 	for b.Loop() {
-		_, err := StructToProto(&UserP{ID: 1, Name: "BenchName"})
+		_, err := StructToProto(&gen.UserP{ID: 1, Name: "BenchName"})
 		if err != nil {
 			b.Fail()
 		}
@@ -234,7 +236,7 @@ func BenchmarkFromProto(b *testing.B) {
 func BenchmarkParToProto(b *testing.B) {
 	b.RunParallel(func(p *testing.PB) {
 		for p.Next() {
-			_, err := StructToProto(&UserP{ID: 1, Name: "BenchName"})
+			_, err := StructToProto(&gen.UserP{ID: 1, Name: "BenchName"})
 			if err != nil {
 				b.Fail()
 			}

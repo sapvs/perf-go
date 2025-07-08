@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package perf;
 
-option go_package = "github.com/vsapan/perf";
+option go_package = "./gen";
 
 message UserP {
     uint64 ID = 1 ;

@@ -8,12 +8,11 @@ type loader struct {
 
 func LoadRam() {
 	ar := make([]*loader, 100)
-	count := 0
+	count := len(ar)
 	for {
 		l := &loader{name: "SomeName"}
 		ar = append(ar, l)
-		count++
-		if count%10000 == 0 {
+		if count%10_000 == 0 {
 			fmt.Printf("Created %d values", count)
 		}
 	}
