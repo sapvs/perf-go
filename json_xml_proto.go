@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"fmt"
 
+	"github.com/vsapan/perf-go/gen"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -53,8 +54,8 @@ func StructToXML(user *User) (string, error) {
 	return string(bytes), nil
 }
 
-func ProtoToStruct(by []byte) (*UserP, error) {
-	var user UserP
+func ProtoToStruct(by []byte) (*gen.UserP, error) {
+	var user gen.UserP
 
 	err := proto.Unmarshal(by, &user)
 	if err != nil {
@@ -64,7 +65,7 @@ func ProtoToStruct(by []byte) (*UserP, error) {
 	return &user, nil
 }
 
-func StructToProto(user *UserP) ([]byte, error) {
+func StructToProto(user *gen.UserP) ([]byte, error) {
 	by, err := proto.Marshal(user)
 	if err != nil {
 		return nil, err
