@@ -1,4 +1,8 @@
 github.com/google/go-cmp v0.7.0 h1:wk8382ETsv4JYUZwIsn6YpYiWiBsYLSJiTsyBybVuN8=
 github.com/google/go-cmp v0.7.0/go.mod h1:pXiqmnSA92OHEEa9HXL2W4E7lf9JzCmGVUdgjX3N/iU=
+github.com/sapvs/gopool v0.0.1 h1:lA3tG4nVOmlWb3UGJHm/vTMwOjBMbTeHJ+rpIZf1ziw=
+github.com/sapvs/gopool v0.0.1/go.mod h1:W62PjGT/NHidkOeo73XlnU/9duUFUmPbYwglMIDpVkI=
+github.com/sapvs/gopool v1.0.0 h1:K6fJDi/yzbawfpD+bX4H0d0wbgmYQJxdu1wbBJQ8uB4=
+github.com/sapvs/gopool v1.0.0/go.mod h1:+9NxYBpTt6hVQCCIhP3VlW1qZKh62pTMb7lj7zLrofE=
 google.golang.org/protobuf v1.36.6 h1:z1NpPI8ku2WgiWnf+t9wTPsn6eP1L7ksHUlkfLvd9xY=
 google.golang.org/protobuf v1.36.6/go.mod h1:jduwjTPXsFjZGTmRluh+L6NjiWu7pchiJ2/5YcXBHnY=
