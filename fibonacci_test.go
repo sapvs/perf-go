@@ -48,7 +48,7 @@ func TestFibonacciSum(t *testing.T) {
 }
 
 // Benchmarks
-var inp int = 50
+var inp int = 30
 var output int
 
 func BenchmarkFibonnaciSerial(b *testing.B) {
