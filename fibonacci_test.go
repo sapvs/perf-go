@@ -11,8 +11,10 @@ var testfun = []struct {
 	name string
 	f    func(int) int
 }{
-	{"FibonacciSumClassic", perf.FibonacciSumV1},
-	{"FibonacciSumDP", perf.FibonacciSumV2},
+	{"FibonacciSumV1", perf.FibonacciSumV1},
+	{"FibonacciSumV2", perf.FibonacciSumV2},
+	{"FibonacciSumV3", perf.FibonacciSumV3},
+	{"FibonacciSumV4", perf.FibonacciSumV4},
 }
 
 func TestFibonacciSum(t *testing.T) {
@@ -46,7 +48,7 @@ func TestFibonacciSum(t *testing.T) {
 }
 
 // Benchmarks
-var inp int = 20
+var inp int = 50
 var output int
 
 func BenchmarkFibonnaciSerial(b *testing.B) {
