@@ -1,3 +1,5 @@
+[![Go](https://github.com/sapvs/perf-go/actions/workflows/go.yml/badge.svg)](https://github.com/sapvs/perf-go/actions/workflows/go.yml)
+
 # perf-go
 Benchmarks of different approaches for common problem in go
 
